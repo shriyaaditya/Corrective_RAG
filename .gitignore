@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+crag-1/
+
+# Environment / secrets
+.env
+
+# Local data / indexes
+vector_db/
+
+# User-provided documents (keep folder via docs/.gitkeep)
+docs/*
+!docs/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
