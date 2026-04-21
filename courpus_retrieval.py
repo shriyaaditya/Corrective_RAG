@@ -2,10 +2,8 @@
 retriever/corpus_retriever.py
 
 A simple TF-IDF retriever over a local in-memory corpus.
-No heavy ML dependencies — uses only the Python standard library + math.
 
-For production use you could swap this out for a FAISS / BM25 / Elasticsearch
-retriever; the rest of the CRAG pipeline stays the same.
+
 """
 
 from __future__ import annotations
