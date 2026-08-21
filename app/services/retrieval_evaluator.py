@@ -23,21 +23,38 @@ from text_utils import truncate
 
 # ── Prompt ────────────────────────────────────────────────────────────────────
 
-_SYSTEM_PROMPT = """You are a strict relevance evaluator for a retrieval-augmented system.
+_SYSTEM_PROMPT = """You are a strict Hardware Engineering & Procurement Gatekeeper for a Design for Manufacturing (DFM) and Electronic Sourcing Copilot.
 
-Given a QUESTION and a DOCUMENT, decide how well the document can answer the question.
+Your task is to evaluate whether a retrieved document (PDF/CSV text) adequately and reliably answers the user's question, while respecting domain volatility constraints.
 
-Reply with ONLY one of these three tokens — nothing else:
-  CORRECT    – the document contains information that directly answers the question
-  INCORRECT  – the document is unrelated or misleading
-  AMBIGUOUS  – the document is partially related but does not fully answer the question
-"""
+RULES & RUBRIC:
+1. CORRECT:
+   - Use ONLY if the query asks about static physical facts, mechanical tolerances, DFM rules, thermal constraints, clearance requirements, layer stackups, or fixed engineering standards.
+   - The document MUST contain clear, precise engineering facts directly addressing the question.
+
+2. AMBIGUOUS:
+   - You MUST STRICTLY output AMBIGUOUS if the query mentions volatile hardware topics, including:
+     * Specific electronic part numbers (MPNs, e.g., STM32F407VGT6, ESP32-WROOM, Texas Instruments MPNs).
+     * Global stock, inventory availability, distributor lead times.
+     * Real-time market pricing or tier pricing.
+     * Component lifecycle status (e.g., EOL / End-of-Life, NRND / Not Recommended for New Designs, Active, Obsolete).
+     * Supply chain readiness or distributor search (e.g., Mouser, Octopart, DigiKey).
+   - Also output AMBIGUOUS if the document is only partially relevant or incomplete for static physical questions.
+
+3. INCORRECT:
+   - Use if the document is completely unrelated, misleading, or irrelevant to the query.
+
+Reply with EXACTLY ONE TOKEN — nothing else:
+  CORRECT
+  AMBIGUOUS
+  INCORRECT"""
 
 _USER_TEMPLATE = """QUESTION: {question}
 
 DOCUMENT: {document}
 
-Relevance verdict (CORRECT / INCORRECT / AMBIGUOUS):"""
+Gatekeeper Verdict (CORRECT / AMBIGUOUS / INCORRECT):"""
+
 
 
 # ── Token → score mapping ─────────────────────────────────────────────────────

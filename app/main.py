@@ -30,7 +30,7 @@ import textwrap
 
 from retriever.document_parser import DocumentParser
 from retriever.document_watcher import DocumentWatcher
-from retriever.vector_store import VectorStore
+from retriever.qdrant_store import QdrantStore, VectorStore
 from retriever.vector_retriever import VectorRetriever
 from crag_pipeline import CRAGPipeline
 
@@ -74,7 +74,7 @@ def _print_sources(store: VectorStore) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser(description="CRAG — Corrective Retrieval Augmented Generation")
     ap.add_argument("--docs-dir", default="docs", help="Folder to watch for documents (default: docs/)")
-    ap.add_argument("--db-dir",   default="vector_db", help="FAISS index folder (default: vector_db/)")
+    ap.add_argument("--db-dir",   default="qdrant_db", help="Qdrant DB store directory (default: qdrant_db/)")
     ap.add_argument("--query",    type=str, default=None, help="Single query, then exit")
     ap.add_argument("--no-verbose", action="store_true", help="Suppress pipeline logs")
     ap.add_argument("--list-sources", action="store_true", help="Print indexed sources and exit")

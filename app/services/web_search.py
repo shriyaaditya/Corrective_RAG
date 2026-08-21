@@ -110,22 +110,21 @@ class WebSearcher:
         passages: list[str] = []
         wiki_results = [r for r in results if "wikipedia.org" in r.get("href", "")]
         other_results = [r for r in results if "wikipedia.org" not in r.get("href", "")]
-
-        # Prioritise Wikipedia
-        for r in (wiki_results + other_results)[: self.top_k]:
+        # Choose ordering based on the prefer_wikipedia flag
+        if self.prefer_wikipedia:
+            ordered = wiki_results + other_results
+        else:
+            ordered = results
+        for r in ordered[: self.top_k]:
             href = r.get("href", "")
             body = r.get("body", "")
-
             if "wikipedia.org/wiki/" in href:
-                # Extract article title from URL
                 title = href.split("/wiki/")[-1].replace("_", " ")
                 text = _fetch_wikipedia(title) or body
             else:
-                text = body  # Use DDG snippet; avoids most paywalls
-
+                text = _fetch_url(href) or body
             if text:
                 passages.append(text[:3000])
-
             if len(passages) >= self.top_k:
                 break
 

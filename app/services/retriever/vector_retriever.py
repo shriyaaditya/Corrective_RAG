@@ -1,16 +1,16 @@
 """
 retriever/vector_retriever.py
 
-Drop-in replacement for CorpusRetriever that queries FAISS instead of TF-IDF.
+Drop-in replacement for CorpusRetriever that queries Qdrant instead of TF-IDF / FAISS.
 
 The interface is identical — .retrieve(query, top_k) returns a list of
 Document objects — so crag_pipeline.py needs only a one-line change.
 
 Usage
 -----
-    store     = VectorStore(store_dir="vector_db")
+    store     = QdrantStore(store_dir="qdrant_db")
     retriever = VectorRetriever(store)
-    docs      = retriever.retrieve("what is retrieval augmented generation?", top_k=5)
+    docs      = retriever.retrieve("what is maximum allowable mechanical tolerance?", top_k=5)
     for doc in docs:
         print(doc.text[:120])
 """
@@ -18,20 +18,20 @@ Usage
 from __future__ import annotations
 
 from courpus_retrieval import Document   # reuse the same dataclass
-from retriever.vector_store import VectorStore
+from retriever.qdrant_store import QdrantStore, VectorStore
+
 
 
 class VectorRetriever:
     """
-    Semantic retriever backed by a VectorStore (FAISS + sentence-transformers).
+    Semantic retriever backed by QdrantStore (Qdrant Dense BAAI/bge-m3 + Sparse BM25).
 
     Parameters
     ----------
-    store : VectorStore
+    store : QdrantStore
         The loaded (and possibly already populated) vector store.
     score_threshold : float
-        Minimum cosine similarity score for a result to be returned.
-        Keeps irrelevant chunks out even if top_k results are requested.
+        Minimum similarity score for a result to be returned.
         Range [0, 1]; default 0.15 is intentionally permissive.
     """
 

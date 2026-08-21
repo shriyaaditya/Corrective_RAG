@@ -30,7 +30,7 @@ from watchdog.events import FileSystemEventHandler, FileSystemEvent
 from watchdog.observers import Observer
 
 from retriever.document_parser import DocumentParser, SUPPORTED_EXTENSIONS
-from retriever.vector_store import VectorStore
+from retriever.qdrant_store import QdrantStore as VectorStore
 
 
 # ── Event handler ─────────────────────────────────────────────────────────────

@@ -150,10 +150,10 @@ Main knobs are in `config.py`:
 ## Tech Stack
 
 - Groq API (`groq`)
+- Qdrant Vector Store (`qdrant-client`)
+- Dense + Sparse Embeddings (`fastembed` with `BAAI/bge-m3` + `BM25`)
 - DuckDuckGo search (`duckduckgo-search`)
 - Wikipedia API (`wikipedia-api`)
-- Local embeddings (`sentence-transformers`)
-- Local ANN index (`faiss-cpu`)
 - File watching (`watchdog`)
 - File parsing (`pypdf`, `python-docx`, `openpyxl`)
 
