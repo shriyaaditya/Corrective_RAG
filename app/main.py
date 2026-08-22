@@ -24,15 +24,18 @@ Usage
 
 from __future__ import annotations
 
-import argparse
 import sys
-import textwrap
+from pathlib import Path
 
-from retriever.document_parser import DocumentParser
-from retriever.document_watcher import DocumentWatcher
-from retriever.qdrant_store import QdrantStore, VectorStore
-from retriever.vector_retriever import VectorRetriever
-from crag_pipeline import CRAGPipeline
+# Add project root and app directory to sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "services"))
+
+from services.retriever.document_parser import DocumentParser
+from services.retriever.document_watcher import DocumentWatcher
+from services.retriever.qdrant_store import QdrantStore, VectorStore
+from services.retriever.vector_retriever import VectorRetriever
+from services.crag_pipeline import CRAGPipeline
 
 
 def _print_result(result) -> None:

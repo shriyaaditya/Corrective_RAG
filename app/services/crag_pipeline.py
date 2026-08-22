@@ -23,14 +23,14 @@ from typing import Optional
 from groq import Groq
 
 from config import TOP_K_DOCUMENTS, TOP_K_WEB_RESULTS
-from retrieval_evaluator import RetrievalEvaluator
-from generator import Generator
-from knowledge_refiner import KnowledgeRefiner
-from query_rewriter import QueryRewriter
-from web_search import WebSearcher
-from courpus_retrieval import CorpusRetriever, Document
-from retriever.vector_retriever import VectorRetriever
-from groq_client import get_client
+from services.retrieval_evaluator import RetrievalEvaluator
+from services.generator import Generator
+from services.knowledge_refiner import KnowledgeRefiner
+from services.query_rewriter import QueryRewriter
+from services.web_search import WebSearcher
+from services.courpus_retrieval import CorpusRetriever, Document
+from services.retriever.vector_retriever import VectorRetriever
+from services.groq_client import get_client
 
 # Accept either retriever — VectorRetriever is the new default
 AnyRetriever = CorpusRetriever | VectorRetriever
@@ -123,12 +123,12 @@ class CRAGPipeline:
             search_query = self.rewriter.rewrite(query)
             self._log(f"          Search query: \"{search_query}\"")
 
-            self._log("Step 3b — Searching the web …")
+            self._log("Step 3b — Querying Mouser Component Sourcing API …")
             web_passages = self.searcher.search(search_query)
-            self._log(f"          Retrieved {len(web_passages)} web passage(s).")
+            self._log(f"          Retrieved {len(web_passages)} Mouser payload(s).")
 
             if web_passages:
-                self._log("Step 3b — Refining external knowledge …")
+                self._log("Step 3b — Pruning external Mouser API payload …")
                 external_knowledge = self.refiner.refine(query, web_passages)
                 self._log(f"          External knowledge ({len(external_knowledge)} chars) ready.")
             else:
