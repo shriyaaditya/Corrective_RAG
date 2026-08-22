@@ -17,8 +17,8 @@ from __future__ import annotations
 from groq import Groq
 
 from config import EVALUATOR_MODEL, UPPER_THRESHOLD, LOWER_THRESHOLD
-from groq_client import chat
-from text_utils import truncate
+from services.groq_client import chat
+from services.text_utils import truncate
 
 
 # ── Prompt ────────────────────────────────────────────────────────────────────
@@ -33,13 +33,8 @@ RULES & RUBRIC:
    - The document MUST contain clear, precise engineering facts directly addressing the question.
 
 2. AMBIGUOUS:
-   - You MUST STRICTLY output AMBIGUOUS if the query mentions volatile hardware topics, including:
-     * Specific electronic part numbers (MPNs, e.g., STM32F407VGT6, ESP32-WROOM, Texas Instruments MPNs).
-     * Global stock, inventory availability, distributor lead times.
-     * Real-time market pricing or tier pricing.
-     * Component lifecycle status (e.g., EOL / End-of-Life, NRND / Not Recommended for New Designs, Active, Obsolete).
-     * Supply chain readiness or distributor search (e.g., Mouser, Octopart, DigiKey).
-   - Also output AMBIGUOUS if the document is only partially relevant or incomplete for static physical questions.
+   - Output AMBIGUOUS if the query explicitly asks for volatile supply chain or market data (such as live stock availability, lead times, market prices, or distributor inventories).
+   - Also output AMBIGUOUS if the document is only partially relevant or lacks specific requested register addresses, pin numbers, or technical parameter tables for static physical questions.
 
 3. INCORRECT:
    - Use if the document is completely unrelated, misleading, or irrelevant to the query.
