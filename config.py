@@ -7,17 +7,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ── Groq ──────────────────────────────────────────────────────────────────────
+# ── Groq & External APIs ──────────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+MOUSER_API_KEY = os.getenv("MOUSER_API_KEY", "")
 
 # Model used for the retrieval evaluator (lightweight + fast)
-EVALUATOR_MODEL = "llama-3.1-8b-instant"
+EVALUATOR_MODEL = "openai/gpt-oss-20b"
 
 # Model used for the generator (stronger)
-GENERATOR_MODEL = "llama-3.3-70b-versatile"
+GENERATOR_MODEL = "openai/gpt-oss-20b"
 
 # Model used for query rewriting
-REWRITER_MODEL = "llama-3.1-8b-instant"
+REWRITER_MODEL = "openai/gpt-oss-20b"
 
 # ── Action Thresholds ─────────────────────────────────────────────────────────
 # Score range returned by the evaluator is [-1, 1]
