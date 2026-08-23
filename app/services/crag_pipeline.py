@@ -138,10 +138,14 @@ class CRAGPipeline:
         if action == "CORRECT":
             final_context = internal_knowledge or ""
         elif action == "INCORRECT":
-            final_context = external_knowledge or ""
+            # Explicitly clear context for out-of-domain / ungrounded queries
+            final_context = ""
+            internal_knowledge = None
+            external_knowledge = None
         else:  # AMBIGUOUS
             parts = filter(None, [internal_knowledge, external_knowledge])
             final_context = " ".join(parts)
+
 
         # ── Step 4: Generate ──────────────────────────────────────────────────
         self._log("Step 4 — Generating answer …")

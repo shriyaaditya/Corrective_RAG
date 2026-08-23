@@ -10,14 +10,16 @@ from __future__ import annotations
 from groq import Groq
 
 from config import GENERATOR_MODEL, MAX_TOKENS_GENERATOR, TEMPERATURE_GENERATOR
-from groq_client import chat
-from text_utils import truncate
+from services.groq_client import chat
+from services.text_utils import truncate
 
 
 _SYSTEM_PROMPT = """You are a knowledgeable assistant.
 Answer the question using ONLY the information provided in the CONTEXT.
 If the context does not contain enough information, say so briefly — do not fabricate facts.
+CRITICAL: Never summarize, paraphrase, or alter mathematical values, temperature ranges, or tolerances. Quote numbers exactly as they appear in the context.
 Be concise and factually precise."""
+
 
 _USER_TEMPLATE = """CONTEXT:
 {context}
