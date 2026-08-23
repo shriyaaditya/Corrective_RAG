@@ -1,0 +1,8 @@
+Item,Designator,Manufacturer Part Number,Manufacturer,Description,Quantity,Status
+1,U1,DRV8301DCAR,Texas Instruments,Three-Phase Gate Driver IC With Dual Current Sense Amplifiers,1,Approved
+2,U2,STM32F407VGT6,STMicroelectronics,32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100,1,Approved
+3,U3,INA240A2PWR,Texas Instruments,High-Precision Bidirectional Current Sense Amplifier 50V/V,2,Approved
+4,U4,MPU-6050,TDK InvenSense,6-Axis Motion Tracking Sensor (Gyro + Accelerometer),1,Approved
+5,Q1-Q6,CSD18532Q5B,Texas Instruments,60V N-Channel NexFET Power MOSFETs for Motor Inverter,6,Approved
+6,C1-C12,CL21B104KBCNNNC,Samsung Electro-Mechanics,Capacitor Ceramic 0.1uF 50V X7R 0805,12,Approved
+7,R1-R8,RC0805FR-0710KL,Yageo,Resistor SMD 10K Ohm 1% 1/8W 0805,8,Approved

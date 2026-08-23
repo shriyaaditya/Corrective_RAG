@@ -5,3 +5,5 @@ python-dotenv>=1.0.0
 qdrant-client>=1.9.0
 fastembed>=0.3.0
 watchdog>=4.0.0
+deepeval>=0.21.0
+langchain-groq>=0.1.0

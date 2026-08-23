@@ -1,0 +1,8 @@
+Internal Part Number,Manufacturer Part Number,Manufacturer,Description,Status
+IPN-DRV-001,DRV8301DCAR,Texas Instruments,Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator,Approved
+IPN-MCU-002,STM32F407VGT6,STMicroelectronics,32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100,Approved
+IPN-CSA-003,INA240A2PWR,Texas Instruments,High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8,Approved
+IPN-IMU-004,MPU-6050,TDK InvenSense,6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24,Approved
+IPN-CAP-005,CL21B104KBCNNNC,Samsung Electro-Mechanics,CAP CER 0.1UF 50V X7R 0805 SMD,Approved
+IPN-RES-006,RC0805FR-0710KL,Yageo,RES SMD 10K OHM 1% 1/8W 0805 SMD,Approved
+IPN-FET-007,CSD18532Q5B,Texas Instruments,60V N-Channel NexFET Power MOSFET VSON-56,Approved

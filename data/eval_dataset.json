@@ -1,0 +1,22 @@
+[
+  {
+    "input": "What is the maximum body temperature for a BGA-256 package during SAC305 reflow?",
+    "expected_output": "The maximum body temperature for BGA-256 and larger packages must not exceed 260°C to prevent substrate delamination."
+  },
+  {
+    "input": "What is the recommended gain setting for the DRV8301 current shunt amplifier to achieve a 40 V/V output?",
+    "expected_output": "The DRV8301 current shunt amplifier gain should be programmed to Option 3 (40 V/V) via the SPI registers."
+  },
+  {
+    "input": "What is the global stock and unit price for part STM32F407VGT6?",
+    "expected_output": "The pipeline must extract the part number STM32F407VGT6 and fetch the live global stock and unit price from the Mouser API."
+  },
+  {
+    "input": "What is the lifecycle status and lead time for internal part number IPN-DRV-001?",
+    "expected_output": "The pipeline must map IPN-DRV-001 to DRV8301DCAR via the internal AVL, and then fetch the lifecycle status and lead time from the Mouser API."
+  },
+  {
+    "input": "What is the specific solder reflow temperature profile for a BGA-256 package in a quantum computing array?",
+    "expected_output": "The system must refuse to answer, explicitly stating that quantum-computing-specific array parameters are not specified in the source documentation, without hallucinating."
+  }
+]
