@@ -17,8 +17,8 @@ Usage
 
 from __future__ import annotations
 
-from courpus_retrieval import Document   # reuse the same dataclass
-from retriever.qdrant_store import QdrantStore, VectorStore
+from services.courpus_retrieval import Document   # reuse the same dataclass
+from services.retriever.qdrant_store import VectorStore
 
 
 

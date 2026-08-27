@@ -28,3 +28,9 @@ docs/*
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Local databases and cache artifacts
+qdrant_db/
+.deepeval/
+data/gatekeeper_score_cache.json
+

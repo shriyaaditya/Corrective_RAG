@@ -12,13 +12,13 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 MOUSER_API_KEY = os.getenv("MOUSER_API_KEY", "")
 
 # Model used for the retrieval evaluator (lightweight + fast)
-EVALUATOR_MODEL = "openai/gpt-oss-20b"
+EVALUATOR_MODEL = "qwen/qwen3.6-27b"
 
 # Model used for the generator (stronger)
-GENERATOR_MODEL = "openai/gpt-oss-20b"
+GENERATOR_MODEL = "qwen/qwen3.6-27b"
 
 # Model used for query rewriting
-REWRITER_MODEL = "openai/gpt-oss-20b"
+REWRITER_MODEL = "qwen/qwen3.6-27b"
 
 # ── Action Thresholds ─────────────────────────────────────────────────────────
 # Score range returned by the evaluator is [-1, 1]

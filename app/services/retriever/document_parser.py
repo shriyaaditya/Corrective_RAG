@@ -109,27 +109,45 @@ def _parse_csv(path: str) -> list[str]:
 
 
 def _parse_text(path: str) -> list[str]:
-    """Fallback for TXT, MD, and any other plain-text format."""
+    """Header-preserving chunker for MD, TXT, and structured documents."""
     try:
         with open(path, "r", encoding="utf-8", errors="ignore") as f:
-            content = f.read().strip()
-        if not content:
+            lines = f.readlines()
+        if not lines:
             return []
-        # Split into chunks of ~1000 chars with overlap
-        chunk_size = 1000
-        overlap = 100
+
         chunks = []
-        start = 0
-        while start < len(content):
-            end = min(start + chunk_size, len(content))
-            chunks.append(content[start:end])
-            if end == len(content):
-                break
-            start = end - overlap
+        current_header = ""
+        current_chunk_lines = []
+        chunk_token_limit = 3000  # character limit per chunk to preserve tabular integrity
+
+        for line in lines:
+            stripped = line.strip()
+            if stripped.startswith("#"):
+                # When encountering a heading, finalize previous chunk if it reaches reasonable length
+                if current_chunk_lines and sum(len(l) for l in current_chunk_lines) > 200:
+                    chunk_text = (current_header + "\n" + "".join(current_chunk_lines)).strip()
+                    chunks.append(chunk_text)
+                    current_chunk_lines = []
+
+                current_header = stripped
+
+            current_chunk_lines.append(line)
+
+            if sum(len(l) for l in current_chunk_lines) >= chunk_token_limit:
+                chunk_text = (current_header + "\n" + "".join(current_chunk_lines)).strip()
+                chunks.append(chunk_text)
+                current_chunk_lines = []
+
+        if current_chunk_lines:
+            chunk_text = (current_header + "\n" + "".join(current_chunk_lines)).strip()
+            chunks.append(chunk_text)
+
         return chunks
     except Exception as e:
         print(f"[DocumentParser] Text error ({path}): {e}")
         return []
+
 
 
 # ── Extension → handler map ───────────────────────────────────────────────────

@@ -38,7 +38,7 @@ class QdrantStore:
     """
 
     COLLECTION_NAME = "hardware_dfm_sourcing"
-    DENSE_MODEL_NAME = "BAAI/bge-m3"
+    DENSE_MODEL_NAME = "BAAI/bge-large-en-v1.5"
     SPARSE_MODEL_NAME = "Qdrant/bm25"
     SOURCES_FILE = "indexed_sources.json"
 
@@ -97,7 +97,7 @@ class QdrantStore:
                 collection_name=self.collection_name,
                 vectors_config={
                     "dense": models.VectorParams(
-                        size=1024,  # BAAI/bge-m3 dimension
+                        size=1024,  # BAAI/bge-large-en-v1.5 dimension
                         distance=models.Distance.COSINE,
                     )
                 },
