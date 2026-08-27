@@ -1,0 +1,442 @@
+[
+  {
+    "query": "What is the maximum body temperature for a BGA-256 package during SAC305 reflow?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n- **BGA Temperature Ceilings:** Peak Package Temperature Limit of 245 \u00b0C. Maximum delta Across BGA Package Body ($\\Delta T$): $\\le 5 \\text{ }^\\circ\\text{C}$.",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Directly specifies BGA Peak Package Temperature Limit of 245 \u00b0C."
+  },
+  {
+    "query": "What is the maximum body temperature for a BGA-256 package during SAC305 reflow?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Contains overall SAC305 package temperature ceilings (260 \u00b0C max), but not package-specific BGA delta ceiling."
+  },
+  {
+    "query": "What is the maximum body temperature for a BGA-256 package during SAC305 reflow?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\n## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\nPer IPC/JEDEC J-STD-033 standards:\n\n- **Floor Life:** MSL-3 components have a maximum allowable floor life of **168 hours** (7 days) at $\\le 30 \\text{ }^\\circ\\text{C} / 60\\% \\text{ RH}$ after opening the Moisture Barrier Bag (MBB).\n- **Baking Requirements:**\n  - High-Temp Bake (in trays): 125 \u00b0C for 12 to 24 hours.\n  - Low-Temp Bake (in tape & reel): 40 \u00b0C (+5/-0 \u00b0C) at $< 5\\% \\text{ RH}$ for 192 hours (8 days).\n\n---",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: discusses MSL-3 bake rules and floor life, completely irrelevant to peak reflow temperature."
+  },
+  {
+    "query": "What is the maximum body temperature for a BGA-256 package during SAC305 reflow?",
+    "chunk": "[Source: STM32F405_STM32F407_Datasheet_Summary.md] ## Operating Conditions & Voltage\n## Operating Conditions & Voltage\n- Operating Voltage Range: 1.8 V to 3.6 V (Supply & I/Os)\n- Ambient Temperature Range: -40 \u00b0C to 85 \u00b0C / -40 \u00b0C to 105 \u00b0C\n- Junction Temperature Range: -40 \u00b0C to 125 \u00b0C\n- Low-Power Modes: Sleep, Stop, and Standby modes\n- VBAT Supply Range: 1.65 V to 3.6 V (for RTC and backup registers)",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Off-topic: operating voltage and junction temperature specs for STM32 MCU."
+  },
+  {
+    "query": "What is the recommended gain setting for the DRV8301 current shunt amplifier to achieve a 40 V/V output?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ### Table 12: Control Register 2 for Current Shunt Amplifiers and Misc Control (Address: 0x03)\n### Table 12: Control Register 2 for Current Shunt Amplifiers and Misc Control (Address: 0x03)\n- Register Address: 0x03\n- GAIN Control Bits [D3:D2]:\n  - Bits [D3:D2] = 00 -> Gain of shunt amplifier: 10 V/V (Default)\n  - Bits [D3:D2] = 01 -> Gain of shunt amplifier: 20 V/V\n  - Bits [D3:D2] = 10 -> Gain of shunt amplifier: 40 V/V\n  - Bits [D3:D2] = 11 -> Gain of shunt amplifier: 80 V/V\n- OCTW_MODE Control Bits [D1:D0]:\n  - Bits [D1:D0] = 00 -> Report both OT (Overtemperature) and OC (Overcurrent) at nOCTW pin (Default)\n  - Bits [D1:D0] = 01 -> Report OT only\n  - Bits [D1:D0] = 10 -> Report OC only\n- DC_CAL_CH1 Control Bit [D4]:\n  - Bit D4 = 0 -> Shunt amplifier 1 connects to load through input pins (Default)\n  - Bit D4 = 1 -> Shunt amplifier 1 shorts input pins and disconnects load for calibration\n- DC_CAL_CH2 Control Bit [D5]:\n  - Bit D5 = 0 -> Shunt amplifier 2 connects to load through input pins (Default)\n  - Bit D5 = 1 -> Shunt amplifier 2 shorts input pins and disconnects load for calibration\n- OC_TOFF Control Bit [D6]:\n  - Bit D6 = 0 -> Cycle by cycle mode (Default)\n  - Bit D6 = 1 -> Off-time control mode",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states Bits [D3:D2] = 10 -> Gain of shunt amplifier: 40 V/V in Register 0x03."
+  },
+  {
+    "query": "What is the recommended gain setting for the DRV8301 current shunt amplifier to achieve a 40 V/V output?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 4 Pin Functions & Key Electrical Specs\n## 4 Pin Functions & Key Electrical Specs\n- PVDD Supply Voltage: 6 V to 60 V (Recommended Operating range 6 V to 60 V)\n- Dead Time Control Resistor (RDTC) Range: 0 to 150 k\u03a9 (50 ns to 500 ns dead time)\n- Current Shunt Amplifier Gain Options: 10 V/V, 20 V/V, 40 V/V, 80 V/V\n- Current Shunt Amplifier Output Swing: 0.3 V to 5.7 V\n- Current Sense Common Mode Range: -0.15 V to 0.15 V\n- Integrated Buck Regulator Output Current: up to 1.5 A\n- Operating Switching Frequency: up to 200 kHz\n- Junction Temperature Range (TJ): -40 \u00b0C to 150 \u00b0C\n- Ambient Operating Temperature Range (TA): -40 \u00b0C to 125 \u00b0C",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists available gain options (10 V/V, 20 V/V, 40 V/V, 80 V/V), but does not state the SPI register control bits needed to program 40 V/V."
+  },
+  {
+    "query": "What is the recommended gain setting for the DRV8301 current shunt amplifier to achieve a 40 V/V output?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 1 Features\n# DRV8301 Three-Phase Gate Driver With Dual Current Shunt Amplifiers and Buck Regulator\n\n## 1 Features\n- 6-V to 60-V Operating Supply Voltage Range\n- 1.7-A Source and 2.3-A Sink Gate Drive Current Capability\n- Slew Rate Control for EMI Reduction\n- Bootstrap Gate Driver With 100% Duty Cycle Support\n- 6- or 3-PWM Input Modes\n- Dual Integrated Current Shunt Amplifiers With Adjustable Gain and Offset\n- Integrated 1.5-A Buck Converter\n- 3.3-V and 5-V Interface Support\n- SPI Communication\n- Protection Features:\n  - Programmable Dead Time Control (DTC)\n  - Programmable Overcurrent Protection (OCP)\n  - PVDD and GVDD Undervoltage Lockout (UVLO)\n  - GVDD Overvoltage Lockout (OVLO)\n  - Overtemperature Warning/Shutdown (OTW/OTS)\n  - Reported Through nFAULT, nOCTW, and SPI Registers",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Mentions dual integrated current shunt amplifiers with adjustable gain, but lacks register address and bit settings."
+  },
+  {
+    "query": "What is the recommended gain setting for the DRV8301 current shunt amplifier to achieve a 40 V/V output?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 3 Description\n## 2 Applications\n- 3-Phase BLDC and PMSM Motors\n- CPAPs and Pumps\n- E-bikes\n- Power Tools\n- Robotics and RC Toys\n- Industrial Automation\n\n## 3 Description\nThe DRV8301 is a gate driver IC for three-phase motor drive applications. The device provides three half-bridge drivers, each capable of driving two N-channel MOSFETs. The DRV8301 supports up to 1.7-A source and 2.3-A peak current capability. The DRV8301 can operate off of a single power supply with a wide range from 6-V to 60-V.\n\nDevice Package Information:\n- PART NUMBER: DRV8301\n- PACKAGE: HTSSOP (56)\n- BODY SIZE (NOM): 14.00 mm x 8.10 mm",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: discusses DRV8301 gate drive current capability (1.7A/2.3A) and voltage range (6V-60V), but not current shunt amplifier gain."
+  },
+  {
+    "query": "What is the global stock and unit price for part STM32F407VGT6?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Confirms IPN-MCU-002 maps to STM32F407VGT6 in internal AVL, but contains zero live market stock or pricing data (requires Mouser API)."
+  },
+  {
+    "query": "What is the global stock and unit price for part STM32F407VGT6?",
+    "chunk": "[Source: STM32F405_STM32F407_Datasheet_Summary.md] ## Core & Architecture\n# STM32F405xx STM32F407xx Datasheet Summary\n\n## Core & Architecture\n- Core: Arm 32-bit Cortex-M4 CPU with FPU, Adaptive real-time accelerator (ART Accelerator)\n- Max Clock Frequency: up to 168 MHz\n- Performance: 210 DMIPS / 1.25 DMIPS/MHz (Dhrystone 2.1)\n- DSP Instructions and Memory Protection Unit (MPU)",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What is the global stock and unit price for part STM32F407VGT6?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What is the lifecycle status and lead time for internal part number IPN-DRV-001?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Maps IPN-DRV-001 to DRV8301DCAR with internal status 'Approved', but does not contain Mouser lifecycle status or factory lead time."
+  },
+  {
+    "query": "What is the lifecycle status and lead time for internal part number IPN-DRV-001?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Shows DRV8301DCAR on internal BOM, but lacks external lead time and lifecycle data."
+  },
+  {
+    "query": "What is the lifecycle status and lead time for internal part number IPN-DRV-001?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 4 Pin Functions & Key Electrical Specs\n## 4 Pin Functions & Key Electrical Specs\n- PVDD Supply Voltage: 6 V to 60 V (Recommended Operating range 6 V to 60 V)\n- Dead Time Control Resistor (RDTC) Range: 0 to 150 k\u03a9 (50 ns to 500 ns dead time)\n- Current Shunt Amplifier Gain Options: 10 V/V, 20 V/V, 40 V/V, 80 V/V\n- Current Shunt Amplifier Output Swing: 0.3 V to 5.7 V\n- Current Sense Common Mode Range: -0.15 V to 0.15 V\n- Integrated Buck Regulator Output Current: up to 1.5 A\n- Operating Switching Frequency: up to 200 kHz\n- Junction Temperature Range (TJ): -40 \u00b0C to 150 \u00b0C\n- Ambient Operating Temperature Range (TA): -40 \u00b0C to 125 \u00b0C",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: details PVDD operating voltage and dead time resistor, no lifecycle status."
+  },
+  {
+    "query": "What is the specific solder reflow temperature profile for a BGA-256 package in a quantum computing array?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n- **BGA Temperature Ceilings:** Peak Package Temperature Limit of 245 \u00b0C. Maximum delta Across BGA Package Body ($\\Delta T$): $\\le 5 \\text{ }^\\circ\\text{C}$.",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Gives general SMT BGA reflow temperature ceiling (245 \u00b0C), but quantum-computing array specific profile parameters do not exist in doc."
+  },
+  {
+    "query": "What is the specific solder reflow temperature profile for a BGA-256 package in a quantum computing array?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Gives general SAC305 profile parameters, but lacks quantum array application specifications."
+  },
+  {
+    "query": "What is the specific solder reflow temperature profile for a BGA-256 package in a quantum computing array?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 4 Pin Functions & Key Electrical Specs\n## 4 Pin Functions & Key Electrical Specs\n- PVDD Supply Voltage: 6 V to 60 V (Recommended Operating range 6 V to 60 V)\n- Dead Time Control Resistor (RDTC) Range: 0 to 150 k\u03a9 (50 ns to 500 ns dead time)\n- Current Shunt Amplifier Gain Options: 10 V/V, 20 V/V, 40 V/V, 80 V/V\n- Current Shunt Amplifier Output Swing: 0.3 V to 5.7 V\n- Current Sense Common Mode Range: -0.15 V to 0.15 V\n- Integrated Buck Regulator Output Current: up to 1.5 A\n- Operating Switching Frequency: up to 200 kHz\n- Junction Temperature Range (TJ): -40 \u00b0C to 150 \u00b0C\n- Ambient Operating Temperature Range (TA): -40 \u00b0C to 125 \u00b0C",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Completely off-topic DRV8301 gate driver specs."
+  },
+  {
+    "query": "What is the pinout configuration and thermal pad ground requirement for DRV8301?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 3 Description\n## 2 Applications\n- 3-Phase BLDC and PMSM Motors\n- CPAPs and Pumps\n- E-bikes\n- Power Tools\n- Robotics and RC Toys\n- Industrial Automation\n\n## 3 Description\nThe DRV8301 is a gate driver IC for three-phase motor drive applications. The device provides three half-bridge drivers, each capable of driving two N-channel MOSFETs. The DRV8301 supports up to 1.7-A source and 2.3-A peak current capability. The DRV8301 can operate off of a single power supply with a wide range from 6-V to 60-V.\n\nDevice Package Information:\n- PART NUMBER: DRV8301\n- PACKAGE: HTSSOP (56)\n- BODY SIZE (NOM): 14.00 mm x 8.10 mm",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "low",
+    "notes": "Mentions HTSSOP (56) package, but lacks pinout diagram and thermal pad grounding rules."
+  },
+  {
+    "query": "What is the pinout configuration and thermal pad ground requirement for DRV8301?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "SMT reflow soldering guidelines, no pinout or thermal ground info."
+  },
+  {
+    "query": "What is the pinout configuration and thermal pad ground requirement for DRV8301?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 1 Features\n# DRV8301 Three-Phase Gate Driver With Dual Current Shunt Amplifiers and Buck Regulator\n\n## 1 Features\n- 6-V to 60-V Operating Supply Voltage Range\n- 1.7-A Source and 2.3-A Sink Gate Drive Current Capability\n- Slew Rate Control for EMI Reduction\n- Bootstrap Gate Driver With 100% Duty Cycle Support\n- 6- or 3-PWM Input Modes\n- Dual Integrated Current Shunt Amplifiers With Adjustable Gain and Offset\n- Integrated 1.5-A Buck Converter\n- 3.3-V and 5-V Interface Support\n- SPI Communication\n- Protection Features:\n  - Programmable Dead Time Control (DTC)\n  - Programmable Overcurrent Protection (OCP)\n  - PVDD and GVDD Undervoltage Lockout (UVLO)\n  - GVDD Overvoltage Lockout (OVLO)\n  - Overtemperature Warning/Shutdown (OTW/OTS)\n  - Reported Through nFAULT, nOCTW, and SPI Registers",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists features including thermal shutdown and nFAULT pins, but missing complete pinout layout."
+  },
+  {
+    "query": "What is the maximum allowed warp and twist percentage for FR-4 PCBs under IPC-A-600?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: SMT reflow profile parameters, completely lacks IPC-A-600 PCB warp/twist rules."
+  },
+  {
+    "query": "What is the maximum allowed warp and twist percentage for FR-4 PCBs under IPC-A-600?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\n## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\nPer IPC/JEDEC J-STD-033 standards:\n\n- **Floor Life:** MSL-3 components have a maximum allowable floor life of **168 hours** (7 days) at $\\le 30 \\text{ }^\\circ\\text{C} / 60\\% \\text{ RH}$ after opening the Moisture Barrier Bag (MBB).\n- **Baking Requirements:**\n  - High-Temp Bake (in trays): 125 \u00b0C for 12 to 24 hours.\n  - Low-Temp Bake (in tape & reel): 40 \u00b0C (+5/-0 \u00b0C) at $< 5\\% \\text{ RH}$ for 192 hours (8 days).\n\n---",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Moisture sensitivity level baking rules, no PCB fabrication warp specs."
+  },
+  {
+    "query": "How does temperature coefficient affect resistor tolerances in high precision motor drive circuits?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists Yageo 10K 1% 0805 resistors (RC0805FR-0710KL) on BOM, but does not provide temp coefficient (TCR) performance analysis."
+  },
+  {
+    "query": "How does temperature coefficient affect resistor tolerances in high precision motor drive circuits?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists internal part IPN-RES-006, but lacks temperature drift analysis."
+  },
+  {
+    "query": "What are the Mouser stocking status and minimum order quantity (MOQ) for Texas Instruments DRV8301DCAR?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Contains internal AVL record for DRV8301DCAR (IPN-DRV-001), but lacks external distributor stock & MOQ."
+  },
+  {
+    "query": "What are the Mouser stocking status and minimum order quantity (MOQ) for Texas Instruments DRV8301DCAR?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Contains internal BOM record for DRV8301DCAR, but lacks Mouser inventory status."
+  },
+  {
+    "query": "What are the Mouser stocking status and minimum order quantity (MOQ) for Texas Instruments DRV8301DCAR?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ### Table 8: Register Address Map\n### Table 8: Register Address Map\n- Address 0x00: Status Register 1 (Read Only - R) - Device Faults\n- Address 0x01: Status Register 2 (Read Only - R) - Device Faults and ID\n- Address 0x02: Control Register 1 (Read/Write - R/W) - Gate Driver Control & OCP Mode\n- Address 0x03: Control Register 2 (Read/Write - R/W) - Current Shunt Amplifiers and Misc Control",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What internal part number maps to Texas Instruments TPS62130RGTR in the AVL?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: internal_avl.csv lists IPN mappings for DRV8301, STM32F407, INA240, etc., but TPS62130RGTR is NOT in the AVL."
+  },
+  {
+    "query": "What internal part number maps to Texas Instruments TPS62130RGTR in the AVL?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Project BOM listing, does not contain TPS62130RGTR."
+  },
+  {
+    "query": "What is the minimum trace width and clearance for 1 oz copper in high-current motor driver PCBs?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Project BOM table, contains no PCB layout trace width guidelines."
+  },
+  {
+    "query": "What is the minimum trace width and clearance for 1 oz copper in high-current motor driver PCBs?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 3 Description\n## 2 Applications\n- 3-Phase BLDC and PMSM Motors\n- CPAPs and Pumps\n- E-bikes\n- Power Tools\n- Robotics and RC Toys\n- Industrial Automation\n\n## 3 Description\nThe DRV8301 is a gate driver IC for three-phase motor drive applications. The device provides three half-bridge drivers, each capable of driving two N-channel MOSFETs. The DRV8301 supports up to 1.7-A source and 2.3-A peak current capability. The DRV8301 can operate off of a single power supply with a wide range from 6-V to 60-V.\n\nDevice Package Information:\n- PART NUMBER: DRV8301\n- PACKAGE: HTSSOP (56)\n- BODY SIZE (NOM): 14.00 mm x 8.10 mm",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: describes DRV8301 motor driver IC output currents, but lacks PCB trace width design rules."
+  },
+  {
+    "query": "What is the maximum reflow peak temperature for QFN-48 packages under J-STD-020 standard?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n- **BGA Temperature Ceilings:** Peak Package Temperature Limit of 245 \u00b0C. Maximum delta Across BGA Package Body ($\\Delta T$): $\\le 5 \\text{ }^\\circ\\text{C}$.",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists BGA temperature ceilings (245 \u00b0C) under Section 3, but QFN-48 specific peak ceiling is completely missing from this chunk."
+  },
+  {
+    "query": "What is the maximum reflow peak temperature for QFN-48 packages under J-STD-020 standard?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "States Maximum Allowable Package Temperature of 260 \u00b0C per J-STD-020 for lead-free SMT packages."
+  },
+  {
+    "query": "What is the lead time for Xilinx Artix-7 FPGA XC7A35T-1FTG256C?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What is the lead time for Xilinx Artix-7 FPGA XC7A35T-1FTG256C?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What is the recommended decoupling capacitor placement for DRV8301 VCP and VSUP pins?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ### Table 12: Control Register 2 for Current Shunt Amplifiers and Misc Control (Address: 0x03)\n### Table 12: Control Register 2 for Current Shunt Amplifiers and Misc Control (Address: 0x03)\n- Register Address: 0x03\n- GAIN Control Bits [D3:D2]:\n  - Bits [D3:D2] = 00 -> Gain of shunt amplifier: 10 V/V (Default)\n  - Bits [D3:D2] = 01 -> Gain of shunt amplifier: 20 V/V\n  - Bits [D3:D2] = 10 -> Gain of shunt amplifier: 40 V/V\n  - Bits [D3:D2] = 11 -> Gain of shunt amplifier: 80 V/V\n- OCTW_MODE Control Bits [D1:D0]:\n  - Bits [D1:D0] = 00 -> Report both OT (Overtemperature) and OC (Overcurrent) at nOCTW pin (Default)\n  - Bits [D1:D0] = 01 -> Report OT only\n  - Bits [D1:D0] = 10 -> Report OC only\n- DC_CAL_CH1 Control Bit [D4]:\n  - Bit D4 = 0 -> Shunt amplifier 1 connects to load through input pins (Default)\n  - Bit D4 = 1 -> Shunt amplifier 1 shorts input pins and disconnects load for calibration\n- DC_CAL_CH2 Control Bit [D5]:\n  - Bit D5 = 0 -> Shunt amplifier 2 connects to load through input pins (Default)\n  - Bit D5 = 1 -> Shunt amplifier 2 shorts input pins and disconnects load for calibration\n- OC_TOFF Control Bit [D6]:\n  - Bit D6 = 0 -> Cycle by cycle mode (Default)\n  - Bit D6 = 1 -> Off-time control mode",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists PVDD supply voltage and buck regulator specs, but lacks exact layout capacitor placement guidelines."
+  },
+  {
+    "query": "What is the operating voltage range for DRV8301 gate driver?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 3 Description\n## 2 Applications\n- 3-Phase BLDC and PMSM Motors\n- CPAPs and Pumps\n- E-bikes\n- Power Tools\n- Robotics and RC Toys\n- Industrial Automation\n\n## 3 Description\nThe DRV8301 is a gate driver IC for three-phase motor drive applications. The device provides three half-bridge drivers, each capable of driving two N-channel MOSFETs. The DRV8301 supports up to 1.7-A source and 2.3-A peak current capability. The DRV8301 can operate off of a single power supply with a wide range from 6-V to 60-V.\n\nDevice Package Information:\n- PART NUMBER: DRV8301\n- PACKAGE: HTSSOP (56)\n- BODY SIZE (NOM): 14.00 mm x 8.10 mm",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states DRV8301 operating supply voltage range from 6-V to 60-V."
+  },
+  {
+    "query": "What is the operating voltage range for DRV8301 gate driver?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 1 Features\n# DRV8301 Three-Phase Gate Driver With Dual Current Shunt Amplifiers and Buck Regulator\n\n## 1 Features\n- 6-V to 60-V Operating Supply Voltage Range\n- 1.7-A Source and 2.3-A Sink Gate Drive Current Capability\n- Slew Rate Control for EMI Reduction\n- Bootstrap Gate Driver With 100% Duty Cycle Support\n- 6- or 3-PWM Input Modes\n- Dual Integrated Current Shunt Amplifiers With Adjustable Gain and Offset\n- Integrated 1.5-A Buck Converter\n- 3.3-V and 5-V Interface Support\n- SPI Communication\n- Protection Features:\n  - Programmable Dead Time Control (DTC)\n  - Programmable Overcurrent Protection (OCP)\n  - PVDD and GVDD Undervoltage Lockout (UVLO)\n  - GVDD Overvoltage Lockout (OVLO)\n  - Overtemperature Warning/Shutdown (OTW/OTS)\n  - Reported Through nFAULT, nOCTW, and SPI Registers",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly lists 6-V to 60-V Operating Supply Voltage Range."
+  },
+  {
+    "query": "What is the operating voltage range for DRV8301 gate driver?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 4 Pin Functions & Key Electrical Specs\n## 4 Pin Functions & Key Electrical Specs\n- PVDD Supply Voltage: 6 V to 60 V (Recommended Operating range 6 V to 60 V)\n- Dead Time Control Resistor (RDTC) Range: 0 to 150 k\u03a9 (50 ns to 500 ns dead time)\n- Current Shunt Amplifier Gain Options: 10 V/V, 20 V/V, 40 V/V, 80 V/V\n- Current Shunt Amplifier Output Swing: 0.3 V to 5.7 V\n- Current Sense Common Mode Range: -0.15 V to 0.15 V\n- Integrated Buck Regulator Output Current: up to 1.5 A\n- Operating Switching Frequency: up to 200 kHz\n- Junction Temperature Range (TJ): -40 \u00b0C to 150 \u00b0C\n- Ambient Operating Temperature Range (TA): -40 \u00b0C to 125 \u00b0C",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists PVDD Supply Voltage: 6 V to 60 V (Recommended Operating range 6 V to 60 V)."
+  },
+  {
+    "query": "What is the operating voltage range for DRV8301 gate driver?",
+    "chunk": "[Source: STM32F405_STM32F407_Datasheet_Summary.md] ## Operating Conditions & Voltage\n## Operating Conditions & Voltage\n- Operating Voltage Range: 1.8 V to 3.6 V (Supply & I/Os)\n- Ambient Temperature Range: -40 \u00b0C to 85 \u00b0C / -40 \u00b0C to 105 \u00b0C\n- Junction Temperature Range: -40 \u00b0C to 125 \u00b0C\n- Low-Power Modes: Sleep, Stop, and Standby modes\n- VBAT Supply Range: 1.65 V to 3.6 V (for RTC and backup registers)",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Near-miss distractor: lists 1.8V to 3.6V operating voltage range for STM32 MCU, NOT DRV8301."
+  },
+  {
+    "query": "What is the moisture sensitivity level (MSL) rating for BGA-256 components?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\n## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\nPer IPC/JEDEC J-STD-033 standards:\n\n- **Floor Life:** MSL-3 components have a maximum allowable floor life of **168 hours** (7 days) at $\\le 30 \\text{ }^\\circ\\text{C} / 60\\% \\text{ RH}$ after opening the Moisture Barrier Bag (MBB).\n- **Baking Requirements:**\n  - High-Temp Bake (in trays): 125 \u00b0C for 12 to 24 hours.\n  - Low-Temp Bake (in tape & reel): 40 \u00b0C (+5/-0 \u00b0C) at $< 5\\% \\text{ RH}$ for 192 hours (8 days).\n\n---",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "States MSL-3 handling and baking rules per IPC/JEDEC J-STD-033 standards."
+  },
+  {
+    "query": "What is the moisture sensitivity level (MSL) rating for BGA-256 components?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Mentions Moisture Sensitivity Guidelines header, but body contains SAC305 reflow profile."
+  },
+  {
+    "query": "What is the recommended stencil aperture reduction for fine pitch QFN packages?",
+    "chunk": "[Source: STM32F405_STM32F407_Datasheet_Summary.md] ## Package Options & Pin Counts\n## Package Options & Pin Counts\n- LQFP64 (10 x 10 mm)\n- WLCSP90 (4.223 x 3.969 mm)\n- LQFP100 (14 x 14 mm)\n- LQFP144 (20 x 20 mm)\n- UFBGA176 (10 x 10 mm)\n- LQFP176 (24 x 24 mm)",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists MCU package options (LQFP, WLCSP, UFBGA), no stencil aperture specs."
+  },
+  {
+    "query": "What is the recommended stencil aperture reduction for fine pitch QFN packages?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n## 3. Package Specific Ceilings (BGA, QFN, HTSSOP)\n- **BGA Temperature Ceilings:** Peak Package Temperature Limit of 245 \u00b0C. Maximum delta Across BGA Package Body ($\\Delta T$): $\\le 5 \\text{ }^\\circ\\text{C}$.",
+    "expected_label": "INCORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Lists BGA peak temperature limits, no stencil design rules."
+  },
+  {
+    "query": "What is the price break at 1000 units for STM32F407VGT6 microcontrollers?",
+    "chunk": "[Source: STM32F405_STM32F407_Datasheet_Summary.md] ## Core & Architecture\n# STM32F405xx STM32F407xx Datasheet Summary\n\n## Core & Architecture\n- Core: Arm 32-bit Cortex-M4 CPU with FPU, Adaptive real-time accelerator (ART Accelerator)\n- Max Clock Frequency: up to 168 MHz\n- Performance: 210 DMIPS / 1.25 DMIPS/MHz (Dhrystone 2.1)\n- DSP Instructions and Memory Protection Unit (MPU)",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What is the price break at 1000 units for STM32F407VGT6 microcontrollers?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "AMBIGUOUS",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Relabeled per Policy A \u2014 market-data queries always route to AMBIGUOUS/Mouser fallback regardless of chunk content."
+  },
+  {
+    "query": "What is the maximum CPU clock frequency of STM32F407VGT6?",
+    "chunk": "[Source: STM32F405_STM32F407_Datasheet_Summary.md] ## Core & Architecture\n# STM32F405xx STM32F407xx Datasheet Summary\n\n## Core & Architecture\n- Core: Arm 32-bit Cortex-M4 CPU with FPU, Adaptive real-time accelerator (ART Accelerator)\n- Max Clock Frequency: up to 168 MHz\n- Performance: 210 DMIPS / 1.25 DMIPS/MHz (Dhrystone 2.1)\n- DSP Instructions and Memory Protection Unit (MPU)",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states Max Clock Frequency: up to 168 MHz for STM32F405xx/STM32F407xx."
+  },
+  {
+    "query": "What is the Liquidus temperature for SAC305 solder paste?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states Liquidus Temperature (TL): 217 \u00b0C."
+  },
+  {
+    "query": "What is the allowable soak duration during SAC305 reflow preheat zone?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 1. SAC305 Lead-Free Reflow Profile Parameters\n# SMT Lead-Free SAC305 Reflow Soldering & Moisture Sensitivity Guidelines\n\n## 1. SAC305 Lead-Free Reflow Profile Parameters\nFor Surface Mount Technology (SMT) assembly utilizing Lead-Free SAC305 (96.5% Sn / 3.0% Ag / 0.5% Cu) solder paste, the thermal profile parameters must adhere to the following specification:\n\n- **Preheat / Soak Zone:**\n  - Temperature Range: 150 \u00b0C to 200 \u00b0C\n  - Soak Duration: 60 seconds to 120 seconds\n  - Ramp-Up Rate: Maximum 3 \u00b0C/sec\n\n- **Time Above Liquidus (TAL):**\n  - Liquidus Temperature ($T_L$): 217 \u00b0C\n  - Time Above Liquidus ($t_L$): 60 seconds to 90 seconds (Maximum 100 seconds)\n\n- **Peak Package Temperature ($T_P$):**\n  - Required Peak Temperature Range: 245 \u00b0C to 255 \u00b0C\n  - Maximum Allowable Package Temperature: 260 \u00b0C (maximum 10 seconds at peak)\n\n- **Cooling Zone:**\n  - Ramp-Down Rate: 2 \u00b0C/sec to 4 \u00b0C/sec (Maximum 6 \u00b0C/sec to prevent thermal shock)\n\n---",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states Soak Duration: 60 seconds to 120 seconds."
+  },
+  {
+    "query": "What SPI register address controls DRV8301 overcurrent protection mode?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ### Table 8: Register Address Map\n### Table 8: Register Address Map\n- Address 0x00: Status Register 1 (Read Only - R) - Device Faults\n- Address 0x01: Status Register 2 (Read Only - R) - Device Faults and ID\n- Address 0x02: Control Register 1 (Read/Write - R/W) - Gate Driver Control & OCP Mode\n- Address 0x03: Control Register 2 (Read/Write - R/W) - Current Shunt Amplifiers and Misc Control",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states Address 0x02: Control Register 1 - Gate Driver Control & OCP Mode."
+  },
+  {
+    "query": "What is the maximum floor life of MSL-3 rated components after MBB opening?",
+    "chunk": "[Source: smt_reflow_guidelines.md] ## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\n## 2. Component Moisture Sensitivity Level (MSL-3) Handling & Baking Rules\nPer IPC/JEDEC J-STD-033 standards:\n\n- **Floor Life:** MSL-3 components have a maximum allowable floor life of **168 hours** (7 days) at $\\le 30 \\text{ }^\\circ\\text{C} / 60\\% \\text{ RH}$ after opening the Moisture Barrier Bag (MBB).\n- **Baking Requirements:**\n  - High-Temp Bake (in trays): 125 \u00b0C for 12 to 24 hours.\n  - Low-Temp Bake (in tape & reel): 40 \u00b0C (+5/-0 \u00b0C) at $< 5\\% \\text{ RH}$ for 192 hours (8 days).\n\n---",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states MSL-3 floor life of 168 hours (7 days) at <= 30 \u00b0C / 60% RH."
+  },
+  {
+    "query": "What is the manufacturer of internal part IPN-FET-007?",
+    "chunk": "[Source: internal_avl.csv] Internal Part Number | Manufacturer Part Number | Manufacturer | Description | Status || IPN-DRV-001 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers and Buck Regulator | Approved || IPN-MCU-002 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 MCU 168MHz 1MB Flash 192KB RAM LQFP-100 | Approved || IPN-CSA-003 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V TSSOP-8 | Approved || IPN-IMU-004 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Device 3-Axis Gyroscope and 3-Axis Accelerometer QFN-24 | Approved || IPN-CAP-005 | CL21B104KBCNNNC | Samsung Electro-Mechanics | CAP CER 0.1UF 50V X7R 0805 SMD | Approved || IPN-RES-006 | RC0805FR-0710KL | Yageo | RES SMD 10K OHM 1% 1/8W 0805 SMD | Approved || IPN-FET-007 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFET VSON-56 | Approved",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states IPN-FET-007 | CSD18532Q5B | Texas Instruments."
+  },
+  {
+    "query": "What is the peak gate drive source current for DRV8301?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ## 3 Description\n## 2 Applications\n- 3-Phase BLDC and PMSM Motors\n- CPAPs and Pumps\n- E-bikes\n- Power Tools\n- Robotics and RC Toys\n- Industrial Automation\n\n## 3 Description\nThe DRV8301 is a gate driver IC for three-phase motor drive applications. The device provides three half-bridge drivers, each capable of driving two N-channel MOSFETs. The DRV8301 supports up to 1.7-A source and 2.3-A peak current capability. The DRV8301 can operate off of a single power supply with a wide range from 6-V to 60-V.\n\nDevice Package Information:\n- PART NUMBER: DRV8301\n- PACKAGE: HTSSOP (56)\n- BODY SIZE (NOM): 14.00 mm x 8.10 mm",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states DRV8301 supports up to 1.7-A source and 2.3-A peak current."
+  },
+  {
+    "query": "What is the default gain setting for DRV8301 current shunt amplifiers?",
+    "chunk": "[Source: DRV8301_Datasheet_Summary.md] ### Table 12: Control Register 2 for Current Shunt Amplifiers and Misc Control (Address: 0x03)\n### Table 12: Control Register 2 for Current Shunt Amplifiers and Misc Control (Address: 0x03)\n- Register Address: 0x03\n- GAIN Control Bits [D3:D2]:\n  - Bits [D3:D2] = 00 -> Gain of shunt amplifier: 10 V/V (Default)\n  - Bits [D3:D2] = 01 -> Gain of shunt amplifier: 20 V/V\n  - Bits [D3:D2] = 10 -> Gain of shunt amplifier: 40 V/V\n  - Bits [D3:D2] = 11 -> Gain of shunt amplifier: 80 V/V\n- OCTW_MODE Control Bits [D1:D0]:\n  - Bits [D1:D0] = 00 -> Report both OT (Overtemperature) and OC (Overcurrent) at nOCTW pin (Default)\n  - Bits [D1:D0] = 01 -> Report OT only\n  - Bits [D1:D0] = 10 -> Report OC only\n- DC_CAL_CH1 Control Bit [D4]:\n  - Bit D4 = 0 -> Shunt amplifier 1 connects to load through input pins (Default)\n  - Bit D4 = 1 -> Shunt amplifier 1 shorts input pins and disconnects load for calibration\n- DC_CAL_CH2 Control Bit [D5]:\n  - Bit D5 = 0 -> Shunt amplifier 2 connects to load through input pins (Default)\n  - Bit D5 = 1 -> Shunt amplifier 2 shorts input pins and disconnects load for calibration\n- OC_TOFF Control Bit [D6]:\n  - Bit D6 = 0 -> Cycle by cycle mode (Default)\n  - Bit D6 = 1 -> Off-time control mode",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly states Bits [D3:D2] = 00 -> Gain of shunt amplifier: 10 V/V (Default)."
+  },
+  {
+    "query": "What is the part number for the 6-Axis motion tracking IMU on the project BOM?",
+    "chunk": "[Source: project_bom.csv] Item | Designator | Manufacturer Part Number | Manufacturer | Description | Quantity | Status || 1 | U1 | DRV8301DCAR | Texas Instruments | Three-Phase Gate Driver IC With Dual Current Sense Amplifiers | 1 | Approved || 2 | U2 | STM32F407VGT6 | STMicroelectronics | 32-bit ARM Cortex-M4 Microcontroller 168MHz LQFP-100 | 1 | Approved || 3 | U3 | INA240A2PWR | Texas Instruments | High-Precision Bidirectional Current Sense Amplifier 50V/V | 2 | Approved || 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor (Gyro + Accelerometer) | 1 | Approved || 5 | Q1-Q6 | CSD18532Q5B | Texas Instruments | 60V N-Channel NexFET Power MOSFETs for Motor Inverter | 6 | Approved || 6 | C1-C12 | CL21B104KBCNNNC | Samsung Electro-Mechanics | Capacitor Ceramic 0.1uF 50V X7R 0805 | 12 | Approved || 7 | R1-R8 | RC0805FR-0710KL | Yageo | Resistor SMD 10K Ohm 1% 1/8W 0805 | 8 | Approved",
+    "expected_label": "CORRECT",
+    "source": "retriever",
+    "confidence": "high",
+    "notes": "Explicitly lists Item 4 | U4 | MPU-6050 | TDK InvenSense | 6-Axis Motion Tracking Sensor."
+  }
+]
